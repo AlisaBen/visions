@@ -29,7 +29,8 @@ if(undefined){
     console.log('undefined');
 }
 
-console.log(10 && 0);
-console.log('' || 'abc');
+console.log(10 && 0); // 0
+console.log('' || 'abc'); // abc
 const a = 100;
-console.log(!!a);
+console.log(!!a); // true
+

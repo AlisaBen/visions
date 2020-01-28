@@ -8,4 +8,4 @@ print(typeof {});//object
 print(typeof print);//function
 print(typeof true);//boolean
 print(typeof undefined);//undefined
-print(typeof [2,3]);
+print(typeof [2,3]); //object

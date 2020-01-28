@@ -15,3 +15,6 @@ function Dog(){
 Dog.prototype = new Animal();
 
 const hashqi = new Dog();
+
+
+

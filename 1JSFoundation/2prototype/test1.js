@@ -10,4 +10,4 @@ console.log(array.__proto__); // []
 console.log(func.__proto__); // [Function]
 console.log(func.prototype);
 console.log(obj.__proto__ === Object.prototype); // true
-console.log(obj.prototype);
+console.log(obj.prototype); //undefined

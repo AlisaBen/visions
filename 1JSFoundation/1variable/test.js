@@ -7,3 +7,4 @@ const c = [2,3];
 const d = c;
 d[1] = 4;
 console.log(c[1]);
+

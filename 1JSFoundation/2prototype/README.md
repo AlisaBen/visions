@@ -77,6 +77,7 @@ f.alertName();
 
 ### 循环对象自身的属性
 在下面的例子中，对象f有三个属性，但是其中一个属性是继承原型链中的属性，属于构造函数的属性，我们希望只打印属于该构造函数的属性，通过hasOwnProperty方法判断
+
 ```javascript
 function Foo(name){
     this.name = name;
@@ -109,4 +110,71 @@ function Foo(name){
 }
 const f = new Foo('zhangsan');
 console.log(f instanceof Foo); // true
+```
+
+如何判断一个变量是数组类型
+```javascript
+const a = [];
+console.log(a instanceof Array);
+```
+
+写一个原型链继承的例子
+```javascript
+function Animal(){
+    this.eat = function(){
+        console.log('animal eat');
+    }
+}
+
+function Dog(){
+    this.bark = function(){
+        console.log('dog bark');
+    }
+}
+Dog.prototype = new Animal();
+
+const hashqi = new Dog();
+
+```
+
+描述new一个对象的过程
+- 创建一个新的空对象
+- this指向这个新对象
+- 执行代码，对this进行赋值
+- 返回this
+
+zepto（或其他框架）源码中如何使用原型链
+- 阅读源码是高效提高技能的方式
+- 不能埋头苦钻有技巧，从网上搜一些资料分析
+- zepto设计和源码分析课程
+（简历中可写阅读源码）
+
+写一个封装DOM查询的例子
+
+```javascript
+function Elem (id) {
+    this.elem = document.getElementById(id);
+}
+Elem.prototype.html = function(val) {
+    const elem = this.elem;
+    if (val) {
+        elem.innerHTML = val;
+        return this; // 链式操作
+    } else {
+        return elem.innerHTML;
+    }
+}
+Elem.prototype.on = function (type, fn) {
+    const elem = this.elem;
+    elem.addEventListener(type,fn);
+}
+const div1 = new Elem('left-container');
+console.log(div1.html());
+
+// div1.html('<p>hello world</p>')
+// console.log(div1.html());
+
+div1.on('click', () => {
+    alert('hello world');
+})
 ```
