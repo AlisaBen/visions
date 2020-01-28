@@ -1,7 +1,7 @@
 # 关于面试
 1. 基层工程师-基础知识
-- 工程师的自我修养-基础
-- 扎实的基础会让你搞笑的学习新技术
+    - 工程师的自我修养-基础
+    - 扎实的基础会让你搞笑的学习新技术
 2. 高级工程师-项目经验
 3. 架构师-解决方案
 ## 几个面试题
@@ -41,6 +41,7 @@
 
 引用类型通过指针指向对象的内存地址，a位置存储的是指向对象的指针，b位置存储的也是指向该对象的指针，通过b修改该对象的属性，a对应的属性也会随之更新
 - 
+```javascript
 const a = { age: 20 };
 const b = a;
 b.age = 21;
@@ -50,10 +51,11 @@ const c = [2,3];
 const d = c;
 d[1] = 4;
 console.log(c[1]);
-
+```
 
 ## typeof运算符详解
 typeof只能区分值类型的详细类型，不能区分引用类型的详细类型，引用类型除了function类型，其他都为object
+```javascript
 /*typeof 能得到哪些基本类型 */
 const print = (str) => {
     console.log(str);
@@ -65,20 +67,25 @@ print(typeof print);//function
 print(typeof true);//boolean
 print(typeof undefined);//undefined
 print(typeof [2,3]); //object
-
+```
 ## 变量计算-强制类型转换（值类型）
 
 - 字符串拼接
+```javascript
 console.log(10 + 100); // 110
 console.log(10 + '100'); // 10100
+```
 - ==运算符
+```javascript
 console.log(10 == '10'); // true
 console.log(10 === '10'); // false
 console.log(0 == null); // false
 console.log(0 == ''); // true
 console.log(null == undefined); // true
+```
 - 
 - if语句
+```javascript
 if(12){
     console.log(12); // 12
 }
@@ -97,15 +104,18 @@ if('123'){
 if(undefined){
     console.log('undefined');
 }
+```
 - 逻辑运算
+```javascript
 console.log(10 && 0); // 0
 console.log('' || 'abc'); // abc
 const a = 100;
 console.log(!!a); // true
-
+```
 
 ## 什么时候使用==
 
+```javascript
 const obj = { a: 1, c: null };
 /*这里相当于obj.a === null || obj.a === undefined */
 if(obj.a == null){
@@ -113,8 +123,10 @@ if(obj.a == null){
 }else if(obj.b == null){
     console.log(obj.b); //undefined
 }
+```
 
 ## JS中的内置函数
+```
 Object
 Array
 Boolean
@@ -124,7 +136,7 @@ Function
 Date
 RegExp
 Error
-
+```
 
 ## JS按照存储方式区分变量类型
 
@@ -133,5 +145,7 @@ Error
 ## 如何理解json
 
 一种数据格式，一个js对象，常用的方法API,字符串和json对象相互转换
+```javascript
 console.log(JSON.stringify({a:10,b:4})); //{"a":10,"b":4}
 console.log(JSON.parse('{"a":10,"b":4}')); // { a: 10, b: 4 }
+```
