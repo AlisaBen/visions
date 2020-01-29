@@ -6,3 +6,7 @@
 [原型和原型链](./1JSFoundation/2prototype/README.md)
 
 [作用域和闭包](./1JSFoundation/3scope/README.md)
+
+[异步和单线程](./1JSFoundation/4thread/README.md)
+
+[其他基础知识](./1JSFoundation/5others/README.md)
