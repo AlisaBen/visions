@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+    </div>
+    <div class="container"></div>
+    <script type="text/javascript">
+        setTimeout(function() {
+            // 获取节点
+            var div1 = document.getElementById('div1');
+            // 创建节点
+            var child = document.createElement('div');
+            child.innerHTML = 'child';
+            div1.appendChild(child);
+        }, 1000);
+    </script>
+</body>
+</html>
