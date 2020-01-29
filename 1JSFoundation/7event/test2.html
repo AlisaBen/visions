@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        <a href="#">a1</a>
+        <a href="#">a2</a>
+        <a href="#">a3</a>
+        <a href="#">a4</a>
+    </div>
+    <script type="text/javascript">
+        //代理
+        var div = document.getElementById('div1');
+        div.addEventListener('click', function(e) {
+            var target = e.target;
+            alert(target.innerHTML);
+        })
+    </script>
+</body>
+</html>
