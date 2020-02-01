@@ -10,3 +10,9 @@
 [异步和单线程](./1JSFoundation/4thread/README.md)
 
 [其他基础知识](./1JSFoundation/5others/README.md)
+
+[DOM](./1JSFoundation/6webAPI/README.md)
+
+[事件](./1JSFoundation/7event/README.md)
+
+[开发环境](./1JSFoundation/8environment/README.md)
