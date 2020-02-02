@@ -99,8 +99,37 @@ for(x = 0;x < 10; x++) {
 listNode.appendChild(frag);
 ```
 
+### 事件节流
+监听事件时，如果事件触发非常频繁，没必要每次都刷新，可以在一定时间之后再进行刷新
+```javascript
+var textarea = document.getElementById('text');
+var timeoutId;
+textarea.addEventListener('keyup'), function() {
+    if(timeoutId) {
+        clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(function() {
+        // 触发change事件
+    }, 100);
+})
+```
+
+### 尽早操作
+
+```javascript
+window.addEventListener('load', function() {
+    // 页面的全部资源加载完才会执行，包括图片、视频等
+});
+document.addEventListener('DOMContentLoaded', function() {
+    // DOM渲染完即可执行，此时图片、视频还可能没有加载完
+})
+```
+
 ## 缓存
 - 通过连接名称控制缓存
 - 只有内容改变的时候，链接名称才会改变
 
 # 安全性
+
+## xss跨站请求攻击
+## xsrf跨站请求伪造

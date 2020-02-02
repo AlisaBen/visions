@@ -216,9 +216,47 @@ setTimeout(function() {
 ## 题目
 
 - DOM是哪种基本的数据结构？
+
+树形结构
+
 - DOM操作的常用API有哪些？
+
+    - Attribute
+        - getAttribute
+        - setAttribute
+    - getElementById
+    - getElementsByTagName
+    - getElementsByClassName
+    - children
+    - parentElement
+    - createElement
+    - removeElement
+
 - DOM节点的attr和property有何区别？
 
-## 知识点
+    - property是一个js对象的属性
+    - attribute是标签的属性
 
 
+## BOM（browser object model）操作
+- 如何检测浏览器的类型
+- 拆解url的各部分
+
+知识点
+- navigator
+- screen
+- location
+- history
+```javascript
+var ua = navigator.userAgent;
+var isChrome = ua.indexOf('Chrome');
+console.log(ua);
+console.log(isChrome);
+console.log(screen.width);
+console.log(screen.height);
+console.log(location.href); // https://pan.baidu.com/disk/home#/all?vmode=list&path=%2F%E6%88%91%E7%9A%84%E8%B5%84%E6%BA%90%2F%E5%89%8D%E7%AB%AF
+console.log(location.protocol); // https:
+console.log(location.host); // pan.baidu.com
+console.log(location.hash); // #/all?vmode=list&path=%2F%E6%88%91%E7%9A%84%E8%B5%84%E6%BA%90%2F%E5%89%8D%E7%AB%AF
+console.log(location.pathname); // /disk/home
+```
