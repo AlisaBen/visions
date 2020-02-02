@@ -1,0 +1,26 @@
+function loadImg(src) {
+	const promise = new Promise(function(resolve, reject) {
+		var img = document.createElement('img');
+		img.onload = function(){
+			resolve(img);
+		}
+		img.onerror = function(){
+			reject();
+		}
+		img.src = src;
+	});
+	return promise;
+}
+// var src = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580638422973&di=05d2f11208facf22839106d770457709&imgtype=0&src=http%3A%2F%2Fphotos.tuchong.com%2F109437%2Ff%2F7334714.jpg";
+var src = ""
+var result = loadImg(src);
+result.then(function(img) {
+	console.log(img.width);
+}, function(){
+	console.log('failed');
+})
+result.then(function(img){
+	console.log(img.height);
+}, function(){
+	console.log('fadaf');
+})

@@ -160,9 +160,128 @@ dog.bark();
 
 #### promise的用法
 
+异步加载的代码
+```javascript
+function loadImg(src, callback, fail) {
+	var img = document.createElement('img');
+	img.onload = function(){
+		callback();
+	}
+	img.onerror = function(){
+		fail();
+	}
+	img.src = src;
+}
+var src = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580638422973&di=05d2f11208facf22839106d770457709&imgtype=0&src=http%3A%2F%2Fphotos.tuchong.com%2F109437%2Ff%2F7334714.jpg";
 
+loadImg(src, function(){
+	console.log('success');
+}, function(){
+	console.log('fail');
+})
+```
 
+promise的基础语法
+```javascript
+function loadImg(src) {
+	const promise = new Promise(function(resolve, reject) {
+		var img = document.createElement('img');
+		img.onload = function(){
+			resolve(img);
+		}
+		img.onerror = function(){
+			reject();
+		}
+		img.src = src;
+	});
+	return promise;
+}
+// var src = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580638422973&di=05d2f11208facf22839106d770457709&imgtype=0&src=http%3A%2F%2Fphotos.tuchong.com%2F109437%2Ff%2F7334714.jpg";
+var src = ""
+var result = loadImg(src);
+result.then(function(img) {
+	console.log(img.width);
+}, function(){
+	console.log('failed');
+})
+result.then(function(img){
+	console.log(img.height);
+}, function(){
+	console.log('fadaf');
+})
+```
 #### es6其他常用功能
+
+- let/const
+- 多行字符串/模板变量
+- 解构赋值
+- 块级作用域
+- 函数默认参数
+- 箭头函数
+
+块级作用域
+```javascript
+var obj = {a: 100, b: 200};
+for (var item in obj) {
+	console.log(item);
+}
+console.log(item + 'aaa');
+
+const obj1 = {a: 100,b:200};
+for (let item1 in obj1) {
+	console.log(item1);
+}
+console.log(typeof item1);
+```
+
+```javascript
+function(a=1){
+
+}
+```
+
+
+```javascript
+function fn() {
+	console.log(this);
+}
+fn.call({a:100})
+```
+### 原型
+
+#### 原型如何实际应用
+jquery和zepto的简单使用
+zepto如何使用原型
+jquery如何使用原型
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+	<p>1</p>
+	<p>2</p>
+	<p>3</p>
+	<div id="div1">
+		<p>this is a test</p>
+	</div>
+	<script type="text/javascript" src="./jquery.js"></script>
+	<script type="text/javascript">
+		var $p = $('p');
+		$p.css('font-size' , '40px');
+		alert($p.html());
+		var $div1 = $('#div1');
+		$div1.css('color', 'blue');
+		alert($div1.html())
+	</script>
+</body>
+</html>
+```
+
+
+#### 原型如何满足扩展
 
 ### 异步
 #### 什么是单线程，和异步有什么关系？
@@ -172,9 +291,7 @@ dog.bark();
 #### promise的标准
 #### async/await 的使用
 
-### 原型
-#### 原型如何实际应用
-#### 原型如何满足扩展
+
 
 
 ## 框架原理

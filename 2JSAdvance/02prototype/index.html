@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+	<p>1</p>
+	<p>2</p>
+	<p>3</p>
+	<div id="div1">
+		<p>this is a test</p>
+	</div>
+	<script type="text/javascript" src="./jquery.js"></script>
+
+	<script type="text/javascript">
+		var $p = $('p');
+		$p.css('font-size' , '40px');
+		alert($p.html());
+		var $div1 = $('#div1');
+		$div1.css('color', 'blue');
+		alert($div1.html())
+	</script>
+</body>
+</html>
