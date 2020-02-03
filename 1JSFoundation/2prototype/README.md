@@ -104,6 +104,7 @@ for(const item in f){
 f.toString()方法会调用f.__proto__中寻找该方法，未果，寻找Foo.__proto__中的方法，Foo的隐式原型指向Object的显式方法，找到toString()方法执行
 Instanceof
 用于判断引用类型属于哪个构造函数的方法,根据原型链的规则，最后寻找Foo.prototype
+
 ```javascript
 function Foo(name){
     this.name = name;
@@ -113,6 +114,7 @@ console.log(f instanceof Foo); // true
 ```
 
 如何判断一个变量是数组类型
+
 ```javascript
 const a = [];
 console.log(a instanceof Array);

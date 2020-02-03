@@ -1,3 +1,4 @@
+## 战胜13%
 class TreeNode:
 	def __init__(self, val):
 		self.val = val
@@ -45,7 +46,6 @@ class SerializeATree:
         """
         arr = data.split(",")
         return self.deserializeCallback(arr)
-
 
 if __name__ == '__main__':
     root = TreeNode(1)

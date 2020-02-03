@@ -11,7 +11,7 @@ const test1 = () => {
 
 
 // test1();
-
+// 加号优先级高于三目运算
 const test2 = () => {
 	var val = 'f';
 	console.log('value is ' + val === 0 ? 'define' : 'undefine');

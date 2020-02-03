@@ -250,9 +250,14 @@ fn.call({a:100})
 ### 原型
 
 #### 原型如何实际应用
+
+> **描述jquery/zepto如何使用原型，结合自己的项目经验，说一个自己开发的例子**
+
 jquery和zepto的简单使用
 zepto如何使用原型
 jquery如何使用原型
+
+通过$符号传入css选择器，实例化构造函数，构造函数的原型中有css和html这两个api
 
 ```javascript
 <!DOCTYPE html>
@@ -280,12 +285,164 @@ jquery如何使用原型
 </html>
 ```
 
+通过自定义jquery实现原型
+- 通过选择器实例化构造函数，利用数组中的slice方法，筛选选择器的dom元素，遍历数组中的元素转换为自己的元素，并将原型指向$.fn，该对象定义了css和html等api，可以供用户调用
+- 实际上在$.fn中还定义了constructor属性，在原型扩展中将会提到，该属性的value为jQuery，该源码暴露给用户的只有$符号，所以我们不能在init中扩展属性，只能在$.fn中进行扩展，通过该属性，我们可以访问到除了css和html等api之外的dom元素，length\selector属性，方便扩展
+
+```javascript
+(function (window) {
+	var jQuery = function (selector) {
+		return new jQuery.fn.init(selector) // 实例化构造函数
+	}
+	jQuery.fn = {
+		css: function (key, value) {
+			alert('css')
+		},
+		html: function(value) {
+			alert('html')
+			// return 'html'
+		}
+	}
+	var init = jQuery.fn.init = function (selector) {
+		var slice = Array.prototype.slice
+		// 通过selector找到dom中的选择器，变成数组
+		var dom = slice.call(document.querySelectorAll(selector))
+		var i, len = dom ? dom.length : 0
+		// 遍历数组，把数组中的每个元素都变成自己的元素
+		for (i = 0;i < len;i++) {
+			this[i] = dom[i]
+		}
+		// len和selector也拓展为对象属性
+		this.length = len
+		this.selector = selector || ''
+	}
+	init.prototype = jQuery.fn // 构造函数的原型赋值道jquery.fn，就拥有了css和html函数
+	window.$ = jQuery
+})(window)
+```
+
+zepto的源码和jquery的差不多
+```javascript
+(function (window) {
+	var zepto = {
+
+	}
+	function Z(dom, selector) {
+		var i, len = dom ? dom.length : 0
+		for(i = 0;i < len;i++){
+			this[i] = dom[i]
+		}
+		this.length = len
+		this.selector = selector || ''
+	}
+	zepto.Z = function (dom, selector) {
+		return new Z(dom, selector)
+	}
+	zepto.init = function (selector) {
+		var slice = Array.prototype.slice
+		var dom = slice.call(document.querySelectorAll(selector))
+		return zepto.Z(dom,selector)
+	}
+	var $ = function (selector) {
+		return zepto.init(selector)
+	}
+	$.fn = {
+		css: function(key, value) {
+			alert('ff')
+		},
+		html: function(value) {
+			alert('html1')
+		}
+	}
+	Z.prototype = $.fn
+	window.$ = $
+})(window)
+```
 
 #### 原型如何满足扩展
 
+- 插件机制,怎么写，扩展到哪里，原因是什么，好处是什么
+
+为什么把原型方法放在$.fn
+```javascript
+jQuery.fn = {
+	constructor: jQuery,
+	css: function (key, value) {
+		alert('css')
+	},
+	html: function(value) {
+		alert('html')
+		// return 'html'
+	}
+}
+
+$.fn = {
+	constructor: zepto.Z,
+	css: function(key, value) {
+		alert('ff')
+	},
+	html: function(value) {
+		alert('html1')
+	}
+}
+```
+
+一个扩展jquery插件
+
+将定义的插件属性放入到init原型中，但是方式是通过jQuery.fn进行转化
+> **只有$会暴露在window全局变量，不能通过构造函数原型拓展(限制)，将插件扩展统一到$.fn.xxx这一个接口，方便使用（好处）**
+
+```javascript
+$.fn.getNodeName = function() {
+	return this[0].nodeName
+}
+````
+
+
 ### 异步
+
 #### 什么是单线程，和异步有什么关系？
+
+- 单线程：只有一个线程，同一时间只能做一件事情，避免dom渲染的冲突，解决方案就是异步
+比如`alert`阻塞，`setTimeout`和`$.ajax`就是异步的方法
+
+h5中webworker支持多线程，但是不能访问dom
+
+异步存在的问题
+- 没有按照书写方式执行，可读性差
+- callback中不容易模块化
+
 #### 什么是event-loop
+
+- 事件轮询，js实现异步的具体解决方案
+- 同步代码，直接执行
+- 异步函数先放在异步队列中
+- 待同步函数执行完毕，轮询执行异步队列的函数
+
+```javascript
+setTimeout(function(){
+	console.log(100)
+})
+setTimeout(function(){
+	console.log(300)
+}， 100)
+console.log(200)
+````
+轮询
+```javascript
+//主进程
+console.log(200)
+//异步队列
+//立刻被放入
+function() {
+	console.log(100)
+}
+//100ms之后被放入
+function(){
+	console.log(300)
+}
+````
+
 #### 目前js解决异步的方案有哪些
 #### 如果只用jquery如何解决异步
 #### promise的标准

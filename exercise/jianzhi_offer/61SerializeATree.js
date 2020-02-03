@@ -1,6 +1,4 @@
-/* 104ms 执行用时104ms 内存消耗43.6MB, 战胜76.2% */
 const { TreeNode } = require('../TreeNode');
-
 var serializeCallback = function(root, arr) {
     if (root === null) {
     	arr.push("null");
@@ -21,20 +19,12 @@ var serialize = function(root) {
 var deserializeCallback = function(arr) {
 	if (arr.length === 0 || arr.length === 1 && arr[0] === 'null') return null;
 	var val = arr.shift();
-	// console.log(val)
 	var root = null;
-	
-	// console.log(val,typeof Number(val) === 'number', typeof val == "number");
-	// console.log(Number(val), Number.isNaN(Number(val)));
-
 	if (!Number.isNaN(Number(val))) {
 		root = new TreeNode(val);
 		root.left = deserializeCallback(arr);
 		root.right = deserializeCallback(arr);
-		// console.log(val, root);
 	}
-	// console.log(root);
-	// console.log(root);
 	return root;
 }
 

@@ -1,3 +1,4 @@
+/*执行用时 88ms,内存消耗44.5MB,击败98.17% */
 const {TreeNode} = require('../TreeNode');
 /**
  * Definition for a binary tree node.
