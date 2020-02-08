@@ -396,7 +396,7 @@ $.fn = {
 $.fn.getNodeName = function() {
 	return this[0].nodeName
 }
-````
+```
 
 
 ### 异步
@@ -404,7 +404,7 @@ $.fn.getNodeName = function() {
 #### 什么是单线程，和异步有什么关系？
 
 - 单线程：只有一个线程，同一时间只能做一件事情，避免dom渲染的冲突，解决方案就是异步
-比如`alert`阻塞，`setTimeout`和`$.ajax`就是异步的方法
+比如alert阻塞，setTimeout和$.ajax就是异步的方法
 
 h5中webworker支持多线程，但是不能访问dom
 
@@ -427,7 +427,8 @@ setTimeout(function(){
 	console.log(300)
 }， 100)
 console.log(200)
-````
+```
+
 轮询
 ```javascript
 //主进程
@@ -441,7 +442,8 @@ function() {
 function(){
 	console.log(300)
 }
-````
+```
+开放封闭原则ajax,promise
 
 #### 目前js解决异步的方案有哪些
 #### 如果只用jquery如何解决异步

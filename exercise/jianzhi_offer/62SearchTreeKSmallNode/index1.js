@@ -1,3 +1,5 @@
+/**执行用时80ms,击败74%，内存消耗39MB,击败72.96% */
+// leetcode返回数值，牛客返回节点
 const { TreeNode } = require('../../TreeNode')
 function KthNode(pRoot, k)
 {

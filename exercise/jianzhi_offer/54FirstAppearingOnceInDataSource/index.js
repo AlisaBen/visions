@@ -4,6 +4,8 @@ var singleChar = [];
 function Init()
 {
     // write code here
+    str = '';
+    singleChar = [];
 }
 //Insert one char from stringstream
 function Insert(ch)

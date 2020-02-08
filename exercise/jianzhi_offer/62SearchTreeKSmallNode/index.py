@@ -1,3 +1,5 @@
+# 解题方法同index1.js文件中的方法相同
+# 执行用时52ms,击败88.9%。内存消耗17MB,击败51%
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):

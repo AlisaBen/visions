@@ -1,5 +1,5 @@
 /**leetcode295 hard */
-/**执行用时452ms，击败27%， 内存消耗64MB,击败58% */
+/**击败94% */
 /**
  * initialize your data structure here.
  */

@@ -31,34 +31,6 @@ var kthSmallest = function(root, k) {
     return obj.result;
 };
 
-var kthSmallest1 = function(root, k) {
-    var index = 0;
-    var dfs1 = function(root, k) {
-        // if (!root) return null;
-        if (root) {
-            var node = dfs1(root.left, k);
-            if (node) return node;
-            // if (root.left) {
-            //     var node = dfs1(root.left, k);
-            //     if (node) return node;
-            // }
-            if (++index === k) {
-                return root;
-            }
-            var node = dfs1(root.right, k);
-            if (node) return node;
-            // if (root.right) {
-            //     var node = dfs1(root.right, k);
-            //     if (node) return node;
-            // }
-        }
-        return null;
-    }
-    // var res = dfs1(root, k);
-    // if (res) return res.val;
-    return dfs1(root, k).val;
-};
-
 node3 = new TreeNode(3);
 node2 = new TreeNode(2);
 node5 = new TreeNode(5);
@@ -70,7 +42,7 @@ node5.right = node6;
 node3.left = node2;
 node3.right = node4;
 node2.left = node1;
-var s = kthSmallest1(node5, 3);
+var s = kthSmallest(node5, 3);
 console.log(s)
 
 // if(!null){

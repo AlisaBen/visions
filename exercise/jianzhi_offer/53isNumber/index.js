@@ -1,3 +1,4 @@
+// 正则表达式
 //s字符串
 function isNumeric(s)
 {

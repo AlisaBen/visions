@@ -1,3 +1,8 @@
+/**
+ * 删除链表中重复元素
+ * 执行用时64，击败99.27%
+ * 内存消耗35.9，击败56%
+ */
 //  Definition for singly-linked list.
 function ListNode(val) {
     this.val = val;
@@ -25,6 +30,7 @@ var deleteDuplicates = function(head) {
             if (store) {
                 k.next = p;
                 k = k.next;
+                k.next = null;
             }
             p = q;
             q = q.next;
@@ -33,8 +39,8 @@ var deleteDuplicates = function(head) {
 
     }
     if (store) k.next = p;
-    console.log(result);
     return result.next;
+    
 };
 
 var node1 = new ListNode(1);
