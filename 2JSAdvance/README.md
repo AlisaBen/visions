@@ -443,14 +443,113 @@ function(){
 	console.log(300)
 }
 ```
-开放封闭原则ajax,promise
+开放封闭原则ajax,promise:对扩展开发，对修改封闭
 
 #### 目前js解决异步的方案有哪些
 #### 如果只用jquery如何解决异步
+
+jQuery Deferred
+jQuery 1.5对ajax的改变举例
+说明如何简单的封装使用Deferred
+说明promise和Deferred的区别：promise只能被动监听.fail  .done的结果，不能干预成功或者失败的情况
+
+```javascript
+var ajax = $.ajax('data.json')
+ajax.done(function() {
+	console.log('')
+})
+.fail(function() {
+	console.log('')
+})
+.done(function() {
+
+})
+console.log(ajax) // 返回deferred对象
+```
+
+另外一种写法
+```javascript
+var ajax = $.ajax('data.json')
+ajax.then(function() {
+	console.log('success')
+}, function() {
+	console.log('fail')
+}) // (成功函数，失败函数)
+console.log(ajax) // 返回deferred对象
+```
+
+只能通过写法上杜绝callback的形式
+
 #### promise的标准
-#### async/await 的使用
 
+异常捕获：
+可以捕获代码中语法的报错，也可以捕获reject
 
+```javascript
+result.then(function(img) {
+	console.log('success')
+	return img;
+}).then(function(img) {
+	console.log('success1')
+}).catch(function(ex) {
+	//统一异常捕获接口
+	console.log(ex);
+})
+```
+
+串联：
+
+```javascript
+var src1 = 'https://www.imooc.com...'
+var result1 = loadImg(src1)
+var src2 = ''
+var result2 = loadImg(src2)
+result1.then(function() {
+	console.log('第一个图片加载完成')
+	return result2;
+}).then(function() {
+	console.log('第二个图片加载完成')
+}).catch(function(ex) {
+	console.log(ex);
+})
+```
+
+```javascript
+Promise.add([result1,result2]).then(datas => {
+	// 待全部执行完成之后，统一执行success，依次包含了多个promise返回的内容
+	console.log(datas[0])
+	console.log(datas[1])
+})
+//Promise.rac接收一个包含多个promise对象的数组
+//只要有一个执行完毕，就执行success
+Promise.race([result1,result2]).then(data => {
+	console.log(data)
+})
+```
+三种状态：pending,fulfilled rejected
+初始状态：pending
+不可逆
+pending-->fulfilled
+pending-->rejected
+
+then中没有显式返回promise，则返回原来的promise
+
+#### async/await 的使用（同步）
+
+用法：
+- 使用await，函数必须用async标识
+- await后面跟的是一个promise实例
+- 需要babel-polyfill
+
+```javascript
+const load = async function() {
+	const result1 = await loadImg(src1)
+	console.log(result1)
+	const result2 = await loadImg(src2)
+	console.log(result2)
+}
+load()
+```
 
 
 ## 框架原理
