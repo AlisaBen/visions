@@ -131,7 +131,47 @@ console.log(b); // 5
 ## api调用的上下文
 第三方的许多函数，都提供了一个可选的参数，确保回调函数使用指定的this
 ```javascript
+function each(el) {
+    console.log(el, this.id);
+}
+var o = { id: "arya" };
+[1, 2, 3].forEach(each,o);
+```
+## new绑定
+
+发生构造函数调用时，会自动执行下面的操作：
+1. 创建一个全新的对象
+2. 这个对象会被执行prototype连接
+3. 这个新对象会绑定到函数调用的this
+4. 如果函数没有返回其他对象，那么new表达式中的函数调用会自动返回新对象
+
+
+
+## 例外
+
+ES6标准中使用的箭头函数不使用this的四种标准规则，而是根据外层（函数或者全局作用域）来决定this
+箭头函数会捕获调用test时的this,无法修改
+```javascript
+function test() {
+    return () => {
+        console.log(this.a);
+    }
+}
+var o1 = { a:4 };
+var o2 = { a:5 };
+var t = test.call(o1);
+t.call(o2); // 4
+
+function test1() {
+    return function() {
+        console.log(this.a);
+    }
+}
+
+var t1 = test1.call(o1);
+t1.call(o2); // 5
+
 ```
 
 
-
+有些调用可能在无意中使用默认绑定规则，可以使用一个DMZ对象，保护全局对象`# = Object.create(null)`

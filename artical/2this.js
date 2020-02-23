@@ -71,7 +71,7 @@ var bar2 = function() {
     foo5.call(obj2);
 };
 bar2(); // 2
-setTimeout(bar2, 100); // 2
+// setTimeout(bar2, 100); // 2
 
 
 function student(something) {
@@ -88,6 +88,27 @@ function each(el) {
 }
 var o = { id: "arya" };
 [1, 2, 3].forEach(each,o);
+
+
+
+function test() {
+    return () => {
+        console.log(this.a);
+    }
+}
+var o1 = { a:4 };
+var o2 = { a:5 };
+var t = test.call(o1);
+t.call(o2); // 4
+
+function test1() {
+    return function() {
+        console.log(this.a);
+    }
+}
+
+var t1 = test1.call(o1);
+t1.call(o2); // 5
 
 
 
